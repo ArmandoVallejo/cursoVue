@@ -1,43 +1,50 @@
 <script setup>
+import { ref, computed } from 'vue'
 
-  import {ref} from 'vue';
-  const name = "Armando";
+const counter = ref(0)
+const favoriteNumbers = ref([])
 
-  //methods
-  const counter = ref(0);
+const increment = () => counter.value++
+const decrement = () => counter.value--
+const reset = () => counter.value = 0
 
-  const increment = () =>{
-    counter.value++;
-  }
+const add = () => {
+  favoriteNumbers.value.push(counter.value)
+}
 
-  const decrement = () =>{
-    counter.value--;
-  }
+// Computed properties
+const classCounter = computed(() => {
+  if (counter.value === 0) return 'zero'
+  if (counter.value > 0) return 'positive'
+  return 'negative'
+})
 
-  const reset = () =>{
-    counter.value = 0;
-  }
-
+const isFavorite = computed(() =>
+  favoriteNumbers.value.includes(counter.value)
+)
 </script>
-<!--v-on se puede abreviar con @-->
-<template>
 
-  <h2 :class="counter > 0 ? 'positive' : 'negative'">{{ counter }}</h2>
+<template>
+  <h2 :class="classCounter">{{ counter }}</h2>
 
   <button @click="increment">Aumentar Contador</button>
   <button @click="decrement">Disminuir Contador</button>
   <button @click="reset">Resetear Contador</button>
+  <button @click="add" :disabled="isFavorite">Añadir fav</button>
+
+  <ul>
+    <li v-for="number in favoriteNumbers" :key="number">{{ number }}</li>
+  </ul>
 </template>
 
-<style> 
-  h1{
-    color:red;
-  }
-  .positive{
-    color:green
-  }
-
-  .negative{
-    color:red
-  }
+<style>
+.positive {
+  color: green;
+}
+.negative {
+  color: red;
+}
+.zero {
+  color: white;
+}
 </style>
