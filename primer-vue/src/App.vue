@@ -7,17 +7,20 @@
     {
       name:"Manzana",
       price:"$1.00",
-      description:"Una manzana"
+      description:"Una manzana",
+      stock:0
     },
     {
       name:"Pera",
       price:"$2.00",
-      description:"Una pera"
+      description:"Una pera",
+      stock:10
     },
     {
       name:"Naranja",
       price:"$3.00",
-      description:"Una naranja"
+      description:"Una naranja",
+      stock:20
     }, 
   ];
 
@@ -42,12 +45,30 @@
     <li v-for="(fruta) in arrayFrutas" :key="fruta.name">{{ fruta.name }} - {{ fruta.price }} - {{ fruta.description }}
     </li>
   </ul>
-
+  <p>v-for recorre objeto</p>
   <ul>
     <li
       v-for="(value, propiedad) in objetoFruta"
     >
   {{propiedad}}:{{ value }}</li>
+  </ul>
+
+  <p>v-for y v-if juntos</p>
+<!--No puedo usar v-for y v-if si la condicion y la iteracion son la misma, debido a que la condicion se ejecuta antes y si no esta definido la iteracion no sabe donde aplicar la condicion-->
+  <ul>
+    <li
+      v-for="item in arrayFrutas" :key="item.name"
+    >{{ item.name }} - {{ item.price }}</li>
+  </ul>
+
+  <p>v-for + v-if con template</p>
+  <ul>
+    <template v-for="item in arrayFrutas" :key="item.name">
+      <li v-if="item.stock > 0"> 
+        {{ item.name }} - {{ item.price }}
+
+      </li>
+    </template>
   </ul>
 
 
