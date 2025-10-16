@@ -9,6 +9,8 @@
             deafult: 'Sin texto'
         }
     })
+
+    defineEmits(['cambiarFavoritoNombre'])
 </script>
 
 <template>
@@ -16,6 +18,7 @@
         <div class="card-body">
             <h5 class="card-title">{{id}}-{{ title }}</h5>
             <p>{{ text }}</p>
+            <button @click="$emit('cambiarFavoritoNombre', title)" class="btn btn-outline-primary">Favorito</button>
         </div>
     </div>
 </template>

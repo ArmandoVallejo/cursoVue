@@ -10,20 +10,24 @@ const posts = ref([
   {title:'Post 4', id: 4, text:'Texto para el componente 4'},
 
 ]);
+
+const favorito = ref('');
+
+const cambiarFavorito = (title) =>{
+  favorito.value = title;
+}
 </script>
 
 <template>
   <h1>App</h1>
-  <ButtonCounter />
+  <h2>Mi post favorito: {{ favorito }}</h2>
+
   <BlogPost
     v-for="post in posts"
     :key="post.id"
     :title="post.title"
     :id="post.id"
     :text="post.text"
-
-  />
-  
-
-  
+    @cambiarFavoritoNombre="cambiarFavorito"
+  /> 
 </template>
