@@ -4,7 +4,7 @@
     defineProps({
         title: String,
         id: Number,
-        text: {
+        body: {
             type: String,
             deafult: 'Sin texto'
         }
@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{id}}-{{ title }}</h5>
-            <p>{{ text }}</p>
+            <p>{{ body }}</p>
             <button @click="$emit('cambiarFavoritoNombre', title)" class="btn btn-outline-primary">Favorito</button>
         </div>
     </div>
