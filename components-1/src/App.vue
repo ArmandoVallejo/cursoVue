@@ -1,6 +1,6 @@
 <script setup>
 import BlogPost from './components/BlogPost.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import PaginatePost from './components/PaginatePost.vue';
 import LoadingSpinner from './components/LoadingSpinner.vue';
 
@@ -9,7 +9,7 @@ const favorito = ref('');
 const postXpage = 10;
 const inicio = ref(0);
 const fin = ref(postXpage);
-const loading = ref(true);
+const loading = ref(false);
 
 const cambiarFavorito = (title) =>{
   favorito.value = title;
@@ -25,12 +25,17 @@ const paginaAnterior = () => {
   fin.value -= postXpage; 
 }
 
-fetch('https://jsonplaceholder.typicode.com/posts')
-  .then( res => res.json())
-  .then( data => posts.value = data)
-  .catch((e)=> console.log(e))
-  .finally(()=> loading.value = false)
-
+onMounted(async()=>{
+  loading.value=true;
+  try{
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+    posts.value = await res.json()
+  }catch(error){
+    console.log(error)
+  }finally{
+    loading.value = false
+  }
+})
 </script>
 
 <template>
