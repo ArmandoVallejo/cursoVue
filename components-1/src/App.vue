@@ -1,7 +1,7 @@
 <script setup>
-import ButtonCounter from './components/ButtonCounter.vue';
 import BlogPost from './components/BlogPost.vue';
 import { ref } from 'vue';
+import PaginatePost from './components/PaginatePost.vue';
 
 const posts = ref([]);
 const favorito = ref('');
@@ -18,6 +18,8 @@ fetch('https://jsonplaceholder.typicode.com/posts')
 <template>
   <h1>App</h1>
   <h2>Mi post favorito: {{ favorito }}</h2>
+
+  <PaginatePost class="mb-2"/>
 
   <BlogPost
     v-for="post in posts"
