@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 export const useGetData = () => {
   const data = ref(null);
+  const errorData = ref(null);
   const loading = ref(true);
 
   const getData = async (url) => {
@@ -13,6 +14,7 @@ export const useGetData = () => {
     } catch (error) {
       console.log(error);
       data.value = null;
+      errorData.value = 'Error de servidor'
     } finally {
       loading.value = false;
     }
@@ -20,6 +22,7 @@ export const useGetData = () => {
   return {
     getData,
     data,
-    loading
+    loading,
+    errorData
   };
 };
