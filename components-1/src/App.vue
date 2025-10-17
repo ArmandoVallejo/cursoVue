@@ -42,8 +42,7 @@ onMounted(async()=>{
   <LoadingSpinner class="mt-5" v-if="loading"/>
   <div v-else class="container">
       <h1>App</h1>
-      <h2>Mi post favorito: {{ favorito }}</h2>
-
+      <h2>Fav ♥️: {{ favorito }}</h2>
     <PaginatePost
       class="mb-2"
       :inicio="inicio"
