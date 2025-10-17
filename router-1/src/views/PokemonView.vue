@@ -20,7 +20,7 @@ const back = () =>{
             
         } catch (error) {
             console.log(error);
-            
+            pokemon.value = null;
         }
         
     };
@@ -30,7 +30,10 @@ const back = () =>{
 </script>
 
 <template>
-    <img :src="pokemon.sprites?.front_default" alt="" />
-    <h1>Pokemon name: {{ $route.params.name }}</h1>
-    <button @click="back">Volver</button>
+    <div v-if="pokemon">
+        <img :src="pokemon.sprites?.front_default" alt="" />
+        <h1>Pokemon name: {{ $route.params.name }}</h1>
+    </div>
+    <h1 v-else>No existe el pokemon</h1>
+    <button class="btn btn-outline-primary" @click="back">Volver</button>
 </template>
