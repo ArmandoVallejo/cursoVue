@@ -4,6 +4,8 @@ import { storeToRefs } from 'pinia';
 
 const useFavoritos = useFavoritosStore();
 const {favoritos} = storeToRefs(useFavoritos); 
+const {removeFav} = useFavoritos;
+
 
 </script>
 
@@ -11,7 +13,14 @@ const {favoritos} = storeToRefs(useFavoritos);
     <h1>Favoritos</h1>
     <p v-if="favoritos.length === 0">Sin favoritos</p>
     <ul v-else class="list-group">
-        <li class="list-group-item" v-for="pokemon in favoritos" :key="pokemon.id">{{ pokemon.name }}</li>
+        <li class="list-group-item" v-for="pokemon in favoritos" :key="pokemon.id">
+            <div>
+                {{ pokemon.name }}
+            </div>
+            <div>
+                <button class="btn btn-sm btn-danger" @click="removeFav(pokemon.id)">Eliminar</button>
+            </div>
+        </li>
     </ul>
 
 </template>
